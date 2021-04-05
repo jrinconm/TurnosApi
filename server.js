@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
-const Role = db.role;
+const Rol = db.Rol;
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and Resync Db");
@@ -25,16 +25,16 @@ db.sequelize.sync({ force: true }).then(() => {
 });
 
 function initial() {
-  Role.create({
-    Rol: "super",
+  Rol.create({
+    rol: "super",
   });
 
-  Role.create({
-    Rol: "gestor",
+  Rol.create({
+    rol: "gestor",
   });
 
-  Role.create({
-    Rol: "usuario",
+  Rol.create({
+    rol: "usuario",
   });
 }
 

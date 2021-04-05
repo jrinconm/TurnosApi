@@ -1,0 +1,42 @@
+{
+  "scss.validate": false,
+  "css.validate": false,
+  "eslint.validate": [
+    "javascript",
+    "vue",
+    "html"
+  ],
+  "htmlhint.options": {
+    "alt-require": true,
+    "inline-style-disabled": true,
+    "inline-script-disabled": true,
+    "style-disabled": true
+  }, 
+  "htmlhint.documentSelector": [
+    "html",
+    "htm"
+  ],
+  "editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Droid Sans Mono', 'monospace', monospace, 'Noto Color Emoji'",
+  "[html]": {
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[vue]": {
+    "editor.formatOnSave": true
+  },
+  "vetur.validation.template": false,
+  "vetur.ignoreProjectWarning": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+	},
+}

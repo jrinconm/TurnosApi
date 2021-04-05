@@ -1,14 +1,14 @@
 module.exports = (sequelize, Sequelize) => {
-  const Rol = sequelize.define("rol", {
-    id_rol: {
+  const EstadoDia = sequelize.define("estado_dia", {
+    id_estado_dia: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    rol: {
+    estado: {
       type: Sequelize.STRING,
     },
   });
 
-  return Rol;
+  return EstadoDia;
 };
