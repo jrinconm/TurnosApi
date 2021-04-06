@@ -15,12 +15,19 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 
 const db = {};
 
+// La libreria
 db.Sequelize = Sequelize;
+// La funcion
 db.sequelize = sequelize;
-
+// Las tablas
 db.Usuario = require("./user.model.js")(sequelize, Sequelize);
-db.Rol = require("./role.model.js")(sequelize, Sequelize);
-
-db.Usuario.belongsTo(db.Rol);
-
+db.Rol = require("./rol.model.js")(sequelize, Sequelize);
+db.Departamento = require("./departamento.model.js")(sequelize, Sequelize);
+db.DiaPresencial = require("./diapresencial.model.js")(sequelize, Sequelize);
+db.EstadoDia = require("./estadodia.model.js")(sequelize, Sequelize);
+// Las relaciones
+db.Usuario.Rol = db.Usuario.belongsTo(db.Rol);
+db.Usuario.Departamento = db.Usuario.belongsTo(db.Departamento);
+db.DiaPresencial.Usuario = db.DiaPresencial.belongsTo(db.Usuario);
+db.DiaPresencial.EstadoDia = db.DiaPresencial.belongsTo(db.EstadoDia);
 module.exports = db;

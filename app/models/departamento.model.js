@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
-  const EstadoDia = sequelize.define(
-    "estados_dia",
+  const Departamento = sequelize.define(
+    "departamento",
     {
-      id_estado_dia: {
+      id_departamento: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      estado: {
+      departamento: {
         type: Sequelize.STRING,
       },
     },
@@ -17,5 +17,5 @@ module.exports = (sequelize, Sequelize) => {
     }
   );
 
-  return EstadoDia;
+  return Departamento;
 };
