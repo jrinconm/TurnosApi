@@ -4,6 +4,7 @@ module.exports = (sequelize, Sequelize) => {
     {
       dia: {
         type: Sequelize.DATEONLY,
+        allowNull: false,
       },
     },
     {
