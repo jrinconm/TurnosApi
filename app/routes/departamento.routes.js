@@ -6,9 +6,8 @@ module.exports = (app) => {
   // Create
   router.post("/", departamento.create);
 
-  // Creo el skell basico
   // Read -- Obtener todos
-  /*
+
   router.get("/", departamento.findAll);
 
   // Read -- Buscar por id
@@ -16,7 +15,8 @@ module.exports = (app) => {
 
   // Read -- Busqueda por nombre
   router.get("/:name", departamento.findByName);
-
+  /*
+  // Creo el skell basico
   // Update -- Actualizar por id
   router.put("/:id", departamento.update);
 
