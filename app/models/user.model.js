@@ -9,15 +9,20 @@ module.exports = (sequelize, Sequelize) => {
       },
       username: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       email: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
       },
       departamento_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
     },
     {

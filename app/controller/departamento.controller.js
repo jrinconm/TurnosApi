@@ -6,10 +6,11 @@ const Departamento = db.Departamento;
 // Crear departamento
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.departamento) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
+    console.log(req.body);
     return;
   }
   // Creo el objeto del cuerpo de la peticion

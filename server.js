@@ -18,13 +18,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and Resync Db");
+});
 
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
 });
-//Ruta Departamentos
 require("./app/routes/departamento.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

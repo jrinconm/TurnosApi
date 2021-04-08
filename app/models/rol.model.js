@@ -9,6 +9,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       rol: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
     },
     {

@@ -23,5 +23,5 @@ module.exports = (app) => {
   // Delete -- Borrar por id
   router.delete("/:id", departamento.delete);
 */
-  app.use("/api/tutorials", router);
+  app.use("/api/departamento", router);
 };

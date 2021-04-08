@@ -9,6 +9,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       departamento: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
     },
     {
