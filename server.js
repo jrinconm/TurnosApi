@@ -27,6 +27,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
 });
 require("./app/routes/departamento.routes")(app);
+require("./app/routes/diapresencial.routes")(app);
+require("./app/routes/estadodia.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
