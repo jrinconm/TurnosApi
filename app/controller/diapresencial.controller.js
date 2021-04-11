@@ -50,7 +50,7 @@ exports.findAll = (req, res) => {
 
 // Buscar por dia
 exports.findOne = (req, res) => {
-  const diapresencial = req.params.dia;
+  const diapresencial = req.query.dia;
 
   DiaPresencial.findAll({
     where: {

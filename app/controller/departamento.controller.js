@@ -45,10 +45,7 @@ exports.findAll = (req, res) => {
 
 // Buscar por id
 exports.findOne = (req, res) => {
-  const id_departamento = req.params.id;
-  console.log("findOne");
-  console.log(req.params);
-  console.log(req.query);
+  const id_departamento = req.query.id;
   Departamento.findByPk(id_departamento)
     .then((data) => {
       res.send(data);
@@ -67,9 +64,6 @@ exports.findOne = (req, res) => {
 // Busqueda por nombre
 exports.findByName = (req, res) => {
   const departamento = req.query.departamento;
-  console.log("findByName");
-  console.log(req.params);
-  console.log(req.query);
   Departamento.findAll({
     where: { departamento: { [Op.like]: `%${departamento}%` } },
   })

@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
 
 // Buscar por id
 exports.findOne = (req, res) => {
-  const id_estado_dia = req.params.id;
+  const id_estado_dia = req.query.id;
 
   EstadoDia.findByPk(id_estado_dia)
     .then((data) => {

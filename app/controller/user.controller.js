@@ -66,7 +66,7 @@ exports.findAll = (req, res) => {
 
 // Buscar por id
 exports.findOne = (req, res) => {
-  const id_usuario = req.params.id;
+  const id_usuario = req.query.id;
 
   Usuario.findByPk(id_usuario)
     .then((data) => {
