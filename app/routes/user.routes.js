@@ -11,16 +11,16 @@ module.exports = (app) => {
   router.get("/", usuario.findAll);
 
   // Read -- Buscar por id
-  router.get("/:id", usuario.findOne);
+  router.get("/id", usuario.findOne);
 
   // Read -- Busqueda por nombre
-  router.get("/:name", usuario.findByName);
+  router.get("/name", usuario.findByName);
 
   // Read -- Busqueda por nombre
-  router.get("/:dep", usuario.findByDep);
+  router.get("/dep", usuario.findByDep);
 
   // Read -- Busqueda por nombre
-  router.get("/:rol", usuario.findByRol);
+  router.get("/rol", usuario.findByRol);
 
   /*
   // Creo el skell basico
