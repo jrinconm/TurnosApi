@@ -129,11 +129,52 @@ exports.findByRol = (req, res) => {
       });
     });
 };
-/*
-// Creo el skell basico
-// Actualizar por id
-exports.update = (req, res) => {};
-
 //Borrar por id
-exports.delete = (req, res) => {};
-*/
+exports.delete = (req, res) => {
+  const id = req.query.id;
+  Usuario.destroy({
+    where: { id_usuario: id },
+  })
+    .then((num) => {
+      console.log(num);
+      if (num == 1) {
+        res.send({
+          message: "Departamento borrado correctamente",
+        });
+      } else {
+        res.send({
+          message: `No se ha podido borrar con el id=${id}. `,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "No se ha podido borrar con el id=" + id + " " + err,
+      });
+    });
+};
+
+// Actualizar por id
+exports.update = (req, res) => {
+  const id = req.query.id;
+
+  Usuario.update(req.body, {
+    where: { id_usuario: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Departamento actualizado correctamente.",
+        });
+      } else {
+        res.send({
+          message: `No se puede actualizar departamento con id=${id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "No se ha podido actualizar id=" + id + " " + err,
+      });
+    });
+};

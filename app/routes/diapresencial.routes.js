@@ -15,13 +15,12 @@ module.exports = (app) => {
 
   // Read -- Busqueda por nombre
   router.get("/name", diapresencial.findByName);
-  /*
-  // Creo el skell basico
+
   // Update -- Actualizar por id
-  router.put("/id", departamento.update);
+  router.put("/id", diapresencial.update);
 
   // Delete -- Borrar por id
-  router.delete("/id", departamento.delete);
-*/
+  router.delete("/id", diapresencial.delete);
+
   app.use("/api/diapresencial", router);
 };

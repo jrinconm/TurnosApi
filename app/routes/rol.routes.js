@@ -13,13 +13,11 @@ module.exports = (app) => {
   // Read -- Buscar por id
   router.get("/id", Rol.findOne);
 
-  /*
-  // Creo el skell basico
   // Update -- Actualizar por id
-  router.put("/id", departamento.update);
+  router.put("/id", Rol.update);
 
   // Delete -- Borrar por id
-  router.delete("/id", departamento.delete);
-*/
+  router.delete("/id", Rol.delete);
+
   app.use("/api/rol", router);
 };

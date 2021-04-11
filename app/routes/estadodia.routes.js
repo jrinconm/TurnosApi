@@ -13,13 +13,11 @@ module.exports = (app) => {
   // Read -- Buscar por id
   router.get("/id", estadodia.findOne);
 
-  /*
-  // Creo el skell basico
   // Update -- Actualizar por id
-  router.put("/id", departamento.update);
+  router.put("/id", estadodia.update);
 
   // Delete -- Borrar por id
-  router.delete("/id", departamento.delete);
-*/
+  router.delete("/id", estadodia.delete);
+
   app.use("/api/estadodia", router);
 };
