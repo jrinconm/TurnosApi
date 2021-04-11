@@ -1,20 +1,27 @@
 module.exports = (app) => {
-  const departamento = require("../controller/departamento.controller.js");
+  const usuario = require("../controller/user.controller.js");
 
   var router = require("express").Router();
 
   // Create
-  router.post("/", departamento.create);
+  router.post("/", usuario.create);
 
   // Read -- Obtener todos
 
-  router.get("/", departamento.findAll);
+  router.get("/", usuario.findAll);
 
   // Read -- Buscar por id
-  router.get("/:id", departamento.findOne);
+  router.get("/:id", usuario.findOne);
 
   // Read -- Busqueda por nombre
-  router.get("/:name", departamento.findByName);
+  router.get("/:name", usuario.findByName);
+
+  // Read -- Busqueda por nombre
+  router.get("/:dep", usuario.findByDep);
+
+  // Read -- Busqueda por nombre
+  router.get("/:rol", usuario.findByRol);
+
   /*
   // Creo el skell basico
   // Update -- Actualizar por id
@@ -23,5 +30,5 @@ module.exports = (app) => {
   // Delete -- Borrar por id
   router.delete("/:id", departamento.delete);
 */
-  app.use("/api/departamento", router);
+  app.use("/api/user", router);
 };
