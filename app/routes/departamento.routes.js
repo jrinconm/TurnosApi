@@ -12,15 +12,18 @@ module.exports = (app) => {
   // Read -- Buscar por id
   router.get("/id", departamento.findOne);
 
+  // Delete -- Borrar por id
+  router.delete("/id", departamento.delete);
+
   // Read -- Busqueda por nombre
   router.get("/name", departamento.findByName);
+
   /*
   // Creo el skell basico
   // Update -- Actualizar por id
   router.put("/id", departamento.update);
 
-  // Delete -- Borrar por id
-  router.delete("/id", departamento.delete);
+
 */
   app.use("/api/departamento", router);
 };

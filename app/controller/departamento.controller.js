@@ -76,11 +76,36 @@ exports.findByName = (req, res) => {
       });
     });
 };
+
+//Borrar por id
+exports.delete = (req, res) => {
+  const id = req.query.id;
+  Departamento.destroy({
+    where: { id_departamento: id },
+  })
+    .then((num) => {
+      console.log(num);
+      if (num == 1) {
+        res.send({
+          message: "Borrado correctamente",
+        });
+      } else {
+        res.send({
+          message: `No se ha podido borrar con el id=${id}. `,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "No se ha podido borrar con el id=" + id + " " + err,
+      });
+    });
+};
+
 /*
 // Creo el skell basico
 // Actualizar por id
 exports.update = (req, res) => {};
 
-//Borrar por id
-exports.delete = (req, res) => {};
+
 */
