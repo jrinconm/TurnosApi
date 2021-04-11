@@ -2,7 +2,7 @@ const db = require("../models");
 const Usuario = db.Usuario;
 // Operadores de Sequelize para condiciones
 const Op = db.Sequelize.Op;
-
+var bcrypt = require("bcryptjs");
 // Crear Usuario
 exports.create = (req, res) => {
   // Validate request
@@ -29,7 +29,7 @@ exports.create = (req, res) => {
   let rol = req.body.rol ? req.body.rol : "1";
 
   // Si no hay password lo pongo como null
-  let pass = req.body.pass ? req.body.pass : null;
+  let pass = req.body.pass ? bcrypt.hashSync(req.body.pass, 8) : null;
 
   // Creo el objeto del cuerpo de la peticion
   const usuario = {

@@ -2,6 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+// De momento para poner la contraseña a fuego
+var bcrypt = require("bcryptjs");
+let passwd = bcrypt.hashSync("azul", 8);
+// Borrar en produccion
+
 const app = express();
 
 var corsOptions = {
@@ -47,12 +52,14 @@ function poblar() {
       username: "Pepe",
       email: "pepe@email.com",
       rolIdRol: 1,
+      password: passwd,
       departamentoIdDepartamento: 1,
     },
     {
       username: "Jose",
       email: "jose@email.com",
       rolIdRol: 2,
+      password: passwd,
       departamentoIdDepartamento: 2,
     },
     {
@@ -90,6 +97,7 @@ require("./app/routes/diapresencial.routes")(app);
 require("./app/routes/estadodia.routes")(app);
 require("./app/routes/rol.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/auth.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
