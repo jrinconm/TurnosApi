@@ -10,7 +10,7 @@ module.exports = (app) => {
 
   router.get("/", diapresencial.findAll);
 
-  // Read -- Buscar por id
+  // Read -- Buscar por dia
   router.get("/dia", diapresencial.findOne);
 
   // Read -- Busqueda por nombre

@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     return;
   } else if (!req.body.departamento) {
     res.status(400).send({
-      message: "Es necesario nidicar el departamento!",
+      message: "Es necesario indicar el departamento!",
     });
     console.log(req.body);
     return;
@@ -33,8 +33,8 @@ exports.create = (req, res) => {
 
   // Creo el objeto del cuerpo de la peticion
   const usuario = {
-    username: req.body.dia,
-    email: req.body.usuario,
+    username: req.body.username,
+    email: req.body.email,
     password: pass,
     rolIdRol: rol,
     departamentoIdDepartamento: req.body.departamento,
