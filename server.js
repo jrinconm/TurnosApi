@@ -17,11 +17,70 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
+const Usuario = db.Usuario;
+const Rol = db.Rol;
+const Departamento = db.Departamento;
+const DiaPresencial = db.DiaPresencial;
+const EstadoDia = db.EstadoDia;
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and Resync Db");
+  poblar();
 });
-
+// Pueblo con datos de prueba
+function poblar() {
+  // Creo 3 roles
+  ["Usuario", "Administrador", "Super"].forEach((dato) =>
+    Rol.create({ rol: dato })
+  );
+  // Creo 3 departamentos
+  ["Wintel", "Centrales", "Distribuidos"].forEach((dato) =>
+    Departamento.create({ departamento: dato })
+  );
+  // Creo 3 estados dia
+  ["Propuesto", "Confirmado", "Cambiando"].forEach((dato) =>
+    EstadoDia.create({ estado: dato })
+  );
+  // Creo 3 usuarios, uno de cada tipo
+  [
+    {
+      username: "Pepe",
+      email: "pepe@email.com",
+      rolIdRol: 1,
+      departamentoIdDepartamento: 1,
+    },
+    {
+      username: "Jose",
+      email: "jose@email.com",
+      rolIdRol: 2,
+      departamentoIdDepartamento: 2,
+    },
+    {
+      username: "Josep",
+      email: "josep@email.com",
+      rolIdRol: 3,
+      departamentoIdDepartamento: 3,
+    },
+  ].forEach((dato) => Usuario.create(dato));
+  // Creo 3 días de trabajo de cada tipo
+  [
+    {
+      dia: new Date(2021, 4, 15),
+      usuarioIdUsuario: 1,
+      estadoDiumIdEstadoDia: 1,
+    },
+    {
+      dia: new Date(2021, 4, 16),
+      usuarioIdUsuario: 2,
+      estadoDiumIdEstadoDia: 1,
+    },
+    {
+      dia: new Date(2021, 4, 17),
+      usuarioIdUsuario: 1,
+      estadoDiumIdEstadoDia: 2,
+    },
+  ].forEach((dato) => DiaPresencial.create(dato));
+}
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
