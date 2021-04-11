@@ -87,7 +87,7 @@ exports.delete = (req, res) => {
       console.log(num);
       if (num == 1) {
         res.send({
-          message: "Borrado correctamente",
+          message: "Departamento borrado correctamente",
         });
       } else {
         res.send({
@@ -102,10 +102,27 @@ exports.delete = (req, res) => {
     });
 };
 
-/*
-// Creo el skell basico
 // Actualizar por id
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  const id = req.query.id;
 
-
-*/
+  Departamento.update(req.body, {
+    where: { id_departamento: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Departamento actualizado correctamente.",
+        });
+      } else {
+        res.send({
+          message: `No se puede actualizar departamento con id=${id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating Tutorial with id=" + id + " " + err,
+      });
+    });
+};
