@@ -20,10 +20,6 @@ module.exports = (sequelize, Sequelize) => {
       password: {
         type: Sequelize.STRING,
       },
-      departamento_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
     },
     {
       // Elimino el cambio de nombre en la tabla
