@@ -13,10 +13,14 @@ exports.create = (req, res) => {
     console.log(req.body);
     return;
   }
+  // Si no hay estado dia lo pongo como provisional
+  let estadodia = req.body.estadodia ? req.body.estadodia : "1";
+
   // Creo el objeto del cuerpo de la peticion
   const diapresencial = {
     dia: req.body.dia,
     usuarioIdUsuario: req.body.usuario,
+    estadoDiumIdEstadoDia: estadodia,
   };
 
   // Lo guardo en la BBDD
