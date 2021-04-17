@@ -33,9 +33,16 @@ let isAdmin = (req, res, next) => {
     console.log(user, res, next);
   });
 };
-
+let isSuper = (req, res, next) => {
+  console.log("Compruebo si es admin");
+  Usuario.findByPk(req.userId).then((user) => {
+    // De momento lo imprimo
+    console.log(user, res, next);
+  });
+};
 const authJwt = {
   compruebatoken: compruebatoken,
   isAdmin: isAdmin,
+  isSuper: isSuper,
 };
 module.exports = authJwt;
