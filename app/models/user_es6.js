@@ -1,17 +1,25 @@
 const Sequelize = require("sequelize");
-class baseIdNombre extends Sequelize.Model {
+class Usuario extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        id: {
+        id_usuario: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,
         },
-        descripcion: {
+        username: {
           type: Sequelize.STRING,
           allowNull: false,
           unique: true,
+        },
+        email: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true,
+        },
+        password: {
+          type: Sequelize.STRING,
         },
       },
       {
@@ -20,6 +28,10 @@ class baseIdNombre extends Sequelize.Model {
         sequelize,
       }
     );
+  }
+  static associate(models) {
+    this.Rol = this.belongsTo(models.Rol);
+    this.Dep = this.belongsTo(models.Departamento);
   }
   static getId(where) {
     return this.findOne({
@@ -36,4 +48,4 @@ class baseIdNombre extends Sequelize.Model {
     });
   }
 }
-module.exports = baseIdNombre;
+module.exports = Usuario;

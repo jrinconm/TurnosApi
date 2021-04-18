@@ -19,19 +19,21 @@ const db = {};
 db.Sequelize = Sequelize;
 // La funcion
 db.sequelize = sequelize;
-// Las tablas
-db.Usuario = require("./user.model.js")(sequelize, Sequelize);
-db.Rol = require("./rol.model.js")(sequelize, Sequelize);
-db.Departamento = require("./departamento.model.js")(sequelize, Sequelize);
-db.DiaPresencial = require("./diapresencial.model.js")(sequelize, Sequelize);
-db.EstadoDia = require("./estadodia.model.js")(sequelize, Sequelize);
-// Las relaciones
-db.Usuario.Rol = db.Usuario.belongsTo(db.Rol);
-db.Usuario.Departamento = db.Usuario.belongsTo(db.Departamento);
-db.DiaPresencial.Usuario = db.DiaPresencial.belongsTo(db.Usuario);
-db.DiaPresencial.EstadoDia = db.DiaPresencial.belongsTo(db.EstadoDia);
-
-var rol_es6 = require("./rol_es6.js");
-db.rol_es6 = rol_es6.init(sequelize, Sequelize);
+// Las clases y tablas
+var Rol = require("./rol_es6.js");
+var EstadoDia = require("./estadodia_es6.js");
+var Departamento = require("./departamento_es6.js");
+var DiaPresencial = require("./diapresencial_es6.js");
+var Usuario = require("./user_es6.js");
+// Inicializo
+db.Rol = Rol.init(sequelize, Sequelize);
+db.EstadoDia = EstadoDia.init(sequelize, Sequelize);
+db.Departamento = Departamento.init(sequelize, Sequelize);
+db.DiaPresencial = DiaPresencial.init(sequelize, Sequelize);
+db.Usuario = Usuario.init(sequelize, Sequelize);
+// Creo las asociaciones
+Object.values(db)
+  .filter((model) => typeof model.associate === "function")
+  .forEach((model) => model.associate(db));
 
 module.exports = db;

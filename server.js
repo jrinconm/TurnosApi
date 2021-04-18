@@ -32,19 +32,20 @@ db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and Resync Db");
   poblar();
 });
+
 // Pueblo con datos de prueba
 function poblar() {
   // Creo 3 roles
   ["Usuario", "Administrador", "Super"].forEach((dato) =>
-    Rol.create({ rol: dato })
+    Rol.create({ descripcion: dato })
   );
   // Creo 3 departamentos
   ["Wintel", "Centrales", "Distribuidos"].forEach((dato) =>
-    Departamento.create({ departamento: dato })
+    Departamento.create({ descripcion: dato })
   );
   // Creo 3 estados dia
   ["Propuesto", "Confirmado", "Cambiando"].forEach((dato) =>
-    EstadoDia.create({ estado: dato })
+    EstadoDia.create({ descripcion: dato })
   );
   // Creo 3 usuarios, uno de cada tipo
   [
@@ -88,6 +89,7 @@ function poblar() {
     },
   ].forEach((dato) => DiaPresencial.create(dato));
 }
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });

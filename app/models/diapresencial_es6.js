@@ -1,17 +1,11 @@
 const Sequelize = require("sequelize");
-class baseIdNombre extends Sequelize.Model {
+class DiaPresencial extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          primaryKey: true,
-        },
-        descripcion: {
-          type: Sequelize.STRING,
+        dia: {
+          type: Sequelize.DATEONLY,
           allowNull: false,
-          unique: true,
         },
       },
       {
@@ -20,6 +14,10 @@ class baseIdNombre extends Sequelize.Model {
         sequelize,
       }
     );
+  }
+  static associate(models) {
+    this.Usuario = this.belongsTo(models.Usuario);
+    this.Estado = this.belongsTo(models.EstadoDia);
   }
   static getId(where) {
     return this.findOne({
@@ -36,4 +34,4 @@ class baseIdNombre extends Sequelize.Model {
     });
   }
 }
-module.exports = baseIdNombre;
+module.exports = DiaPresencial;
