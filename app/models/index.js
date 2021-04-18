@@ -30,4 +30,8 @@ db.Usuario.Rol = db.Usuario.belongsTo(db.Rol);
 db.Usuario.Departamento = db.Usuario.belongsTo(db.Departamento);
 db.DiaPresencial.Usuario = db.DiaPresencial.belongsTo(db.Usuario);
 db.DiaPresencial.EstadoDia = db.DiaPresencial.belongsTo(db.EstadoDia);
+
+var rol_es6 = require("./rol_es6.js");
+db.rol_es6 = rol_es6.init(sequelize, Sequelize);
+
 module.exports = db;
