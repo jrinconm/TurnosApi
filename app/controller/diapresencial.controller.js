@@ -19,8 +19,8 @@ exports.create = (req, res) => {
   // Creo el objeto del cuerpo de la peticion
   const diapresencial = {
     dia: req.body.dia,
-    usuarioIdUsuario: req.body.usuario,
-    estadoDiumIdEstadoDia: estadodia,
+    UsuarioId: req.body.usuario,
+    EstadoDiumId: estadodia,
   };
 
   // Lo guardo en la BBDD
@@ -73,7 +73,7 @@ exports.findByName = (req, res) => {
 
   DiaPresencial.findAll({
     where: {
-      usuarioIdUsuario: { [Op.eq]: `${usuario}` },
+      UsuarioId: { [Op.eq]: `${usuario}` },
     },
   })
     .then((data) => {
