@@ -74,17 +74,17 @@ function poblar() {
   [
     {
       dia: new Date(2021, 4, 15),
-      UsuarioIdUsuario: 1,
+      UsuarioId: 1,
       EstadoDiumId: 1,
     },
     {
       dia: new Date(2021, 4, 16),
-      UsuarioIdUsuario: 2,
+      UsuarioId: 2,
       EstadoDiumId: 1,
     },
     {
       dia: new Date(2021, 4, 17),
-      UsuarioIdUsuario: 1,
+      UsuarioId: 1,
       EstadoDiumId: 2,
     },
   ].forEach((dato) => DiaPresencial.create(dato));
