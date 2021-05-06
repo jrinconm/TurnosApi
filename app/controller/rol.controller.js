@@ -47,8 +47,7 @@ exports.findAll = (req, res) => {
 // Buscar por id
 exports.findOne = (req, res) => {
   const idRol = req.query.id;
-
-  Rol.findByPk(idRol)
+  Rol.getId(idRol)
     .then((data) => {
       res.send(data);
     })

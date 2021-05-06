@@ -3,7 +3,7 @@ class Usuario extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        id_usuario: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

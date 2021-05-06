@@ -66,15 +66,15 @@ exports.findAll = (req, res) => {
 
 // Buscar por id
 exports.findOne = (req, res) => {
-  const id_usuario = req.query.id;
+  const id = req.query.id;
 
-  Usuario.findByPk(id_usuario)
+  Usuario.findByPk(id)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Usuario with id=" + id_usuario + " " + err,
+        message: "Error retrieving Usuario with id=" + id + " " + err,
       });
     });
 };
@@ -118,7 +118,7 @@ exports.findByRol = (req, res) => {
   const rol = req.query.rol;
 
   Usuario.findAll({
-    where: { rolIdRol: { [Op.eq]: `${rol}` } },
+    where: { RolId: { [Op.eq]: `${rol}` } },
   })
     .then((data) => {
       res.send(data);
@@ -133,7 +133,7 @@ exports.findByRol = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.query.id;
   Usuario.destroy({
-    where: { id_usuario: id },
+    where: { id: id },
   })
     .then((num) => {
       console.log(num);
@@ -159,7 +159,7 @@ exports.update = (req, res) => {
   const id = req.query.id;
 
   Usuario.update(req.body, {
-    where: { id_usuario: id },
+    where: { id: id },
   })
     .then((num) => {
       if (num == 1) {

@@ -52,40 +52,40 @@ function poblar() {
     {
       username: "Pepe",
       email: "pepe@email.com",
-      rolIdRol: 1,
+      RolId: 1,
       password: passwd,
-      departamentoIdDepartamento: 1,
+      DepartamentoId: 1,
     },
     {
       username: "Jose",
       email: "jose@email.com",
-      rolIdRol: 2,
+      RolId: 2,
       password: passwd,
-      departamentoIdDepartamento: 2,
+      DepartamentoId: 2,
     },
     {
       username: "Josep",
       email: "josep@email.com",
-      rolIdRol: 3,
-      departamentoIdDepartamento: 3,
+      RolId: 3,
+      DepartamentoId: 3,
     },
   ].forEach((dato) => Usuario.create(dato));
   // Creo 3 días de trabajo de cada tipo
   [
     {
       dia: new Date(2021, 4, 15),
-      usuarioIdUsuario: 1,
-      estadoDiumIdEstadoDia: 1,
+      UsuarioId: 1,
+      EstadoDiumId: 1,
     },
     {
       dia: new Date(2021, 4, 16),
-      usuarioIdUsuario: 2,
-      estadoDiumIdEstadoDia: 1,
+      UsuarioId: 2,
+      EstadoDiumId: 1,
     },
     {
       dia: new Date(2021, 4, 17),
-      usuarioIdUsuario: 1,
-      estadoDiumIdEstadoDia: 2,
+      UsuarioId: 1,
+      EstadoDiumId: 2,
     },
   ].forEach((dato) => DiaPresencial.create(dato));
 }
