@@ -62,7 +62,7 @@ exports.findOne = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.query.id;
   Rol.destroy({
-    where: { id_rol: id },
+    where: { id: id },
   })
     .then((num) => {
       console.log(num);
@@ -87,7 +87,7 @@ exports.delete = (req, res) => {
 exports.update = (req, res) => {
   const id = req.query.id;
   Rol.update(req.body, {
-    where: { id_rol: id },
+    where: { id: id },
   })
     .then((num) => {
       if (num == 1) {

@@ -45,18 +45,14 @@ exports.findAll = (req, res) => {
 
 // Buscar por id
 exports.findOne = (req, res) => {
-  const id_departamento = req.query.id;
-  Departamento.findByPk(id_departamento)
+  const id = req.query.id;
+  Departamento.findByPk(id)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message:
-          "Error retrieving Departamento with id=" +
-          id_departamento +
-          " " +
-          err,
+        message: "Error retrieving Departamento with id=" + id + " " + err,
       });
     });
 };
@@ -81,7 +77,7 @@ exports.findByName = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.query.id;
   Departamento.destroy({
-    where: { id_departamento: id },
+    where: { id: id },
   })
     .then((num) => {
       console.log(num);
@@ -107,7 +103,7 @@ exports.update = (req, res) => {
   const id = req.query.id;
 
   Departamento.update(req.body, {
-    where: { id_departamento: id },
+    where: { id: id },
   })
     .then((num) => {
       if (num == 1) {

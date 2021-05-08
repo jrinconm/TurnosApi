@@ -46,15 +46,15 @@ exports.findAll = (req, res) => {
 
 // Buscar por id
 exports.findOne = (req, res) => {
-  const id_estado_dia = req.query.id;
+  const id = req.query.id;
 
-  EstadoDia.findByPk(id_estado_dia)
+  EstadoDia.findByPk(id)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving estado with id=" + id_estado_dia + " " + err,
+        message: "Error retrieving estado with id=" + id + " " + err,
       });
     });
 };
@@ -63,7 +63,7 @@ exports.findOne = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.query.id;
   EstadoDia.destroy({
-    where: { id_dia: id },
+    where: { id: id },
   })
     .then((num) => {
       console.log(num);
@@ -88,7 +88,7 @@ exports.delete = (req, res) => {
 exports.update = (req, res) => {
   const id = req.query.id;
   EstadoDia.update(req.body, {
-    where: { id_dia: id },
+    where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
