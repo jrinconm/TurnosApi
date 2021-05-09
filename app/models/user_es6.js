@@ -21,6 +21,12 @@ class Usuario extends Sequelize.Model {
         password: {
           type: Sequelize.STRING,
         },
+        icono: {
+          type: Sequelize.STRING,
+        },
+        color: {
+          type: Sequelize.STRING,
+        },
       },
       {
         // Elimino el cambio de nombre en la tabla
