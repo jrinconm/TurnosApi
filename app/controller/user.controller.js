@@ -139,7 +139,7 @@ exports.delete = (req, res) => {
       console.log(num);
       if (num == 1) {
         res.send({
-          message: "Departamento borrado correctamente",
+          message: "Usuario borrado correctamente",
         });
       } else {
         res.send({
@@ -162,19 +162,20 @@ exports.update = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
+      console.log(req.body);
       if (num == 1) {
         res.send({
-          message: "Departamento actualizado correctamente.",
+          message: "Usuario actualizado correctamente.",
         });
       } else {
         res.send({
-          message: `No se puede actualizar departamento con id=${id}.`,
+          message: `No se puede actualizar usuario con id=${id}.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "No se ha podido actualizar id=" + id + " " + err,
+        message: "No se ha podido actualizar usuario con id=" + id + " " + err,
       });
     });
 };
