@@ -37,7 +37,9 @@ exports.create = (req, res) => {
 
 // Obtener todos
 exports.findAll = (req, res) => {
-  DiaPresencial.findAll()
+  DiaPresencial.findAll({
+    include: [{ model: db.Usuario, attributes: ["RolId", "DepartamentoId"] }],
+  })
     .then((data) => {
       res.send(data);
     })
@@ -51,7 +53,6 @@ exports.findAll = (req, res) => {
 // Buscar por dia
 exports.findOne = (req, res) => {
   const diapresencial = req.query.dia;
-
   DiaPresencial.findAll({
     where: {
       dia: { [Op.eq]: `${diapresencial}` },
@@ -70,11 +71,35 @@ exports.findOne = (req, res) => {
 // Busqueda por usuario
 exports.findByName = (req, res) => {
   const usuario = req.query.usuario;
-
   DiaPresencial.findAll({
     where: {
       UsuarioId: { [Op.eq]: `${usuario}` },
     },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error al obtener los dias.",
+      });
+    });
+};
+
+// Busqueda por departamento
+exports.findByDep = (req, res) => {
+  const departamento = req.query.departamento;
+  console.log(departamento);
+  DiaPresencial.findAll({
+    include: [
+      {
+        model: db.Usuario,
+        attributes: ["RolId", "DepartamentoId"],
+        where: {
+          RolId: { [Op.eq]: `${departamento}` },
+        },
+      },
+    ],
   })
     .then((data) => {
       res.send(data);

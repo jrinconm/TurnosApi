@@ -54,7 +54,7 @@ function poblar() {
       email: "pepe@email.com",
       RolId: 1,
       password: passwd,
-      DepartamentoId: 1,
+      DepartamentoId: 2,
     },
     {
       username: "Jose",
@@ -67,7 +67,7 @@ function poblar() {
       username: "Josep",
       email: "josep@email.com",
       RolId: 3,
-      DepartamentoId: 3,
+      DepartamentoId: 2,
     },
   ].forEach((dato) => Usuario.create(dato));
   // Creo 3 días de trabajo de cada tipo
