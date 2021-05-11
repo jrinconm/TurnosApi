@@ -1,3 +1,4 @@
+const { Sequelize } = require("sequelize");
 const db = require("../models");
 const DiaPresencial = db.DiaPresencial;
 // Operadores de Sequelize para condiciones
@@ -89,14 +90,45 @@ exports.findByName = (req, res) => {
 // Busqueda por departamento
 exports.findByDep = (req, res) => {
   const departamento = req.query.departamento;
-  console.log(departamento);
   DiaPresencial.findAll({
     include: [
       {
         model: db.Usuario,
         attributes: ["RolId", "DepartamentoId"],
         where: {
-          RolId: { [Op.eq]: `${departamento}` },
+          DepartamentoId: { [Op.eq]: `${departamento}` },
+        },
+      },
+    ],
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error al obtener los dias.",
+      });
+    });
+};
+// Busqueda por usuarios de departamento
+exports.findByUserDep = (req, res) => {
+  const idUsuario = req.query.id;
+  // Toca hacer una subconsulta
+  let consulta =
+    "(SELECT DepartamentoId FROM Usuario WHERE id = " + idUsuario + ")";
+
+  DiaPresencial.findAll({
+    include: [
+      {
+        model: db.Usuario,
+        as: "Usuario",
+        attributes: ["id", "username", "icono", "color", "DepartamentoId"],
+        where: {
+          "$Usuario.DepartamentoId$": {
+            [Op.eq]:
+              //`${idUsuario}`
+              Sequelize.literal(consulta),
+          },
         },
       },
     ],

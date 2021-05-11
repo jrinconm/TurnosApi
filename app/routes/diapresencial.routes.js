@@ -24,13 +24,18 @@ module.exports = (app) => {
   // Read -- Busqueda por nombre
   router.get("/name", [authJwt.compruebatoken], diapresencial.findByName);
 
-  // Read -- Busqueda por nombre
+  // Read -- Busqueda por departamento
   router.get(
     "/departamento",
     [authJwt.compruebatoken],
     diapresencial.findByDep
   );
-
+  // Read -- Obtener los dias que trabajan los del departamento de un usuario
+  router.get(
+    "/usuariodep",
+    [authJwt.compruebatoken],
+    diapresencial.findByUserDep
+  );
   // Update -- Actualizar por id
   router.put("/id", [authJwt.compruebatoken], diapresencial.update);
 
