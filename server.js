@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
 var bcrypt = require("bcryptjs");
 let passwd = bcrypt.hashSync("azul", 8);
@@ -70,7 +70,7 @@ function poblar() {
       DepartamentoId: 2,
     },
   ].forEach((dato) => Usuario.create(dato));
-  // Creo 3 días de trabajo de cada tipo
+  // Relleno dias de trabajo de cada tipo
   [
     {
       dia: new Date(2021, 4, 15),
@@ -87,9 +87,50 @@ function poblar() {
       UsuarioId: 1,
       EstadoDiumId: 2,
     },
+    {
+      dia: new Date(2021, 4, 11),
+      UsuarioId: 1,
+      EstadoDiumId: 1,
+    },
+    {
+      dia: new Date(2021, 4, 12),
+      UsuarioId: 2,
+      EstadoDiumId: 1,
+    },
+    {
+      dia: new Date(2021, 4, 9),
+      UsuarioId: 1,
+      EstadoDiumId: 2,
+    },
   ].forEach((dato) => DiaPresencial.create(dato));
 }
+// Creo el scheduler de mysql para marcar como cerrados los dias
 
+let conexion = mysql.createConnection({
+  host: "127.0.0.1",
+  port: 3306,
+  user: "root",
+  password: "qwerty",
+});
+conexion.connect();
+conexion.query("use " + "TurnosTeletrabajo");
+
+let consulta = [
+  "SET GLOBAL event_scheduler = ON",
+  "DROP EVENT IF EXISTS actualizador",
+  "CREATE EVENT actualizador ON SCHEDULE EVERY 1 DAY STARTS CURRENT_TIMESTAMP DO update DiaPresencial set EstadoDiumId = 3 where dia < CURDATE();",
+];
+consulta.forEach((element) =>
+  conexion.query(element, function (err, result) {
+    if (err) {
+      throw err;
+    } else {
+      console.log(result);
+    }
+  })
+);
+
+conexion.end();
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
