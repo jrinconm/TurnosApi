@@ -33,7 +33,7 @@ exports.login = (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
-        rol: user.rol,
+        rol: user.RolId,
         accessToken: token,
       });
     })
