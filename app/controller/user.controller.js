@@ -3,6 +3,11 @@ const Usuario = db.Usuario;
 // Operadores de Sequelize para condiciones
 const Op = db.Sequelize.Op;
 var bcrypt = require("bcryptjs");
+let sinpassword = {
+  attributes: {
+    exclude: ["password"],
+  },
+};
 // Crear Usuario
 exports.create = (req, res) => {
   // Validate request
@@ -53,7 +58,7 @@ exports.create = (req, res) => {
 
 // Obtener todos
 exports.findAll = (req, res) => {
-  Usuario.findAll()
+  Usuario.findAll(sinpassword)
     .then((data) => {
       res.send(data);
     })
@@ -68,7 +73,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.query.id;
 
-  Usuario.findByPk(id)
+  Usuario.findByPk(id, sinpassword)
     .then((data) => {
       res.send(data);
     })
@@ -85,6 +90,7 @@ exports.findByName = (req, res) => {
 
   Usuario.findAll({
     where: { username: { [Op.like]: `%${usuario}%` } },
+    sinpassword,
   })
     .then((data) => {
       res.send(data);
@@ -101,6 +107,7 @@ exports.findByDep = (req, res) => {
   const departamento = req.query.departamento;
   Usuario.findAll({
     where: { departamentoId: { [Op.eq]: `${departamento}` } },
+    sinpassword,
   })
     .then((data) => {
       res.send(data);
@@ -118,6 +125,7 @@ exports.findByRol = (req, res) => {
 
   Usuario.findAll({
     where: { RolId: { [Op.eq]: `${rol}` } },
+    sinpassword,
   })
     .then((data) => {
       res.send(data);

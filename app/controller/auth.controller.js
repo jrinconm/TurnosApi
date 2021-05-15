@@ -1,7 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const Usuario = db.Usuario;
-
+const mensajeError = "Usuario o contraseña erroneo";
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
@@ -13,7 +13,7 @@ exports.login = (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "Usuario no encontrado." });
+        return res.status(401).send({ message: mensajeError });
       }
 
       var compruebaPass = bcrypt.compareSync(req.body.pass, user.password);
@@ -21,7 +21,7 @@ exports.login = (req, res) => {
       if (!compruebaPass) {
         return res.status(401).send({
           accessToken: null,
-          message: "Contraseña no valida",
+          message: mensajeError,
         });
       }
 
