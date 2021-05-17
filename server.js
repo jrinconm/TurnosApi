@@ -16,7 +16,8 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/* Descomentar si queremos resetear la BBDD
+//Descomentar si queremos resetear la BBDD
+/*
 const db = require("./app/models");
 var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
