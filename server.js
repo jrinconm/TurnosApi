@@ -3,12 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-
-var corsOptions = {
+// Deshabilitado para aceptar todos los origenes
+/* var corsOptions = {
   origin: "http://localhost:8081",
-};
+};*/
 
-app.use(cors(corsOptions));
+app.use(cors(/*corsOptions*/));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -17,13 +17,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Descomentar si queremos resetear la BBDD
-
+/*
 const db = require("./app/models");
 var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
 var bcrypt = require("bcryptjs");
 let passwd = bcrypt.hashSync("azul", 8);
 // Borrar en produccion
+
 const Usuario = db.Usuario;
 const Rol = db.Rol;
 const Departamento = db.Departamento;
@@ -110,7 +111,7 @@ function poblar() {
 // Creo el scheduler de mysql para marcar como cerrados los dias
 
 let conexion = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "mariadb",
   port: 3306,
   user: "root",
   password: "qwerty",
@@ -134,7 +135,7 @@ consulta.forEach((element) =>
 );
 
 conexion.end();
-
+*/
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
