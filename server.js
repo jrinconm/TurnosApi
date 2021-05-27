@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Descomentar si queremos resetear la BBDD
-
+/*
 const db = require("./app/models");
 var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
@@ -77,11 +77,6 @@ function poblar() {
       EstadoDiumId: 1,
     },
     {
-      dia: new Date(2021, 4, 16),
-      UsuarioId: 2,
-      EstadoDiumId: 1,
-    },
-    {
       dia: new Date(2021, 4, 17),
       UsuarioId: 1,
       EstadoDiumId: 2,
@@ -101,7 +96,7 @@ function poblar() {
       UsuarioId: 1,
       EstadoDiumId: 2,
     },
-  ].forEach((dato) => DiaPresencial.create(dato));
+  ].forEach((dato) => DiaPresencial.create(dato) && console.log(dato));
 }
 
 // Creo el scheduler de mysql para marcar como cerrados los dias
@@ -132,7 +127,7 @@ consulta.forEach((element) =>
 );
 
 conexion.end();
-
+*/
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
