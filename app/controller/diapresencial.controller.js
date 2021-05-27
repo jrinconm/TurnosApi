@@ -39,7 +39,7 @@ exports.create = (req, res) => {
 // Obtener todos
 exports.findAll = (req, res) => {
   DiaPresencial.findAll({
-    include: [{ model: db.Usuario, attributes: ["rol", "DepartamentoId"] }],
+    include: [{ model: db.Usuario, attributes: ["rol", "departamento"] }],
   })
     .then((data) => {
       res.send(data);
@@ -94,9 +94,9 @@ exports.findByDep = (req, res) => {
     include: [
       {
         model: db.Usuario,
-        attributes: ["rol", "DepartamentoId"],
+        attributes: ["rol", "departamento"],
         where: {
-          DepartamentoId: { [Op.eq]: `${departamento}` },
+          departamento: { [Op.eq]: `${departamento}` },
         },
       },
     ],
@@ -115,16 +115,16 @@ exports.findByUserDep = (req, res) => {
   const idUsuario = req.query.id;
   // Toca hacer una subconsulta
   let consulta =
-    "(SELECT DepartamentoId FROM Usuario WHERE id = " + idUsuario + ")";
+    "(SELECT departamento FROM Usuario WHERE id = " + idUsuario + ")";
 
   DiaPresencial.findAll({
     include: [
       {
         model: db.Usuario,
         as: "Usuario",
-        attributes: ["id", "username", "icono", "color", "DepartamentoId"],
+        attributes: ["id", "username", "icono", "color", "departamento"],
         where: {
-          "$Usuario.DepartamentoId$": {
+          "$Usuario.departamento$": {
             [Op.eq]:
               //`${idUsuario}`
               Sequelize.literal(consulta),

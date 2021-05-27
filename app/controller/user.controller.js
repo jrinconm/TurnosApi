@@ -42,7 +42,7 @@ exports.create = (req, res) => {
     email: req.body.email,
     password: pass,
     rol: rol,
-    DepartamentoId: req.body.departamento,
+    departamento: req.body.departamento,
   };
 
   // Lo guardo en la BBDD
@@ -107,7 +107,7 @@ exports.findByName = (req, res) => {
 exports.findByDep = (req, res) => {
   const departamento = req.query.departamento;
   Usuario.findAll({
-    where: { departamentoId: { [Op.eq]: `${departamento}` } },
+    where: { departamento: { [Op.eq]: `${departamento}` } },
     sinpassword,
   })
     .then((data) => {

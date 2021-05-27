@@ -30,6 +30,9 @@ class Usuario extends Sequelize.Model {
         color: {
           type: Sequelize.STRING,
         },
+        departamento: {
+          type: Sequelize.STRING,
+        },
       },
       {
         // Elimino el cambio de nombre en la tabla
@@ -37,9 +40,6 @@ class Usuario extends Sequelize.Model {
         sequelize,
       }
     );
-  }
-  static associate(models) {
-    this.Dep = this.belongsTo(models.Departamento);
   }
   static getId(where) {
     return this.findOne({

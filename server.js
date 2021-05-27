@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Descomentar si queremos resetear la BBDD
-/*
+
 const db = require("./app/models");
 var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
@@ -26,8 +26,6 @@ let passwd = bcrypt.hashSync("azul", 8);
 // Borrar en produccion
 
 const Usuario = db.Usuario;
-const Departamento = db.Departamento;
-const DiaPresencial = db.DiaPresencial;
 const EstadoDia = db.EstadoDia;
 
 db.sequelize.sync({ force: true }).then(() => {
@@ -37,10 +35,6 @@ db.sequelize.sync({ force: true }).then(() => {
 
 // Pueblo con datos de prueba
 function poblar() {
-  // Creo 3 departamentos
-  ["Wintel", "Centrales", "Distribuidos"].forEach((dato) =>
-    Departamento.create({ descripcion: dato })
-  );
   // Creo 3 estados dia
   ["Propuesto", "Confirmado", "Cambiando"].forEach((dato) =>
     EstadoDia.create({ descripcion: dato })
@@ -52,51 +46,23 @@ function poblar() {
       email: "pepe@email.com",
       rol: "base",
       password: passwd,
-      DepartamentoId: 2,
+      departamento: "administración",
     },
     {
       username: "Jose",
       email: "jose@email.com",
       rol: "gestor",
       password: passwd,
-      DepartamentoId: 2,
+      departamento: "administración",
     },
     {
       username: "Josep",
       email: "josep@email.com",
       rol: "admin",
       password: passwd,
-      DepartamentoId: 2,
+      departamento: "administración",
     },
   ].forEach((dato) => Usuario.create(dato));
-  // Relleno dias de trabajo de cada tipo
-  [
-    {
-      dia: new Date(2021, 4, 15),
-      UsuarioId: 1,
-      EstadoDiumId: 1,
-    },
-    {
-      dia: new Date(2021, 4, 17),
-      UsuarioId: 1,
-      EstadoDiumId: 2,
-    },
-    {
-      dia: new Date(2021, 4, 11),
-      UsuarioId: 1,
-      EstadoDiumId: 1,
-    },
-    {
-      dia: new Date(2021, 4, 12),
-      UsuarioId: 2,
-      EstadoDiumId: 1,
-    },
-    {
-      dia: new Date(2021, 4, 9),
-      UsuarioId: 1,
-      EstadoDiumId: 2,
-    },
-  ].forEach((dato) => DiaPresencial.create(dato) && console.log(dato));
 }
 
 // Creo el scheduler de mysql para marcar como cerrados los dias
@@ -117,22 +83,19 @@ let consulta = [
   "CREATE EVENT actualizador ON SCHEDULE EVERY 1 DAY STARTS CURRENT_TIMESTAMP DO update DiaPresencial set EstadoDiumId = 3 where dia < CURDATE();",
 ];
 consulta.forEach((element) =>
-  conexion.query(element, function (err, result) {
+  conexion.query(element, function (err) {
     if (err) {
       throw err;
-    } else {
-      console.log(result);
     }
   })
 );
 
 conexion.end();
-*/
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
 });
-require("./app/routes/departamento.routes")(app);
 require("./app/routes/diapresencial.routes")(app);
 require("./app/routes/estadodia.routes")(app);
 require("./app/routes/user.routes")(app);
