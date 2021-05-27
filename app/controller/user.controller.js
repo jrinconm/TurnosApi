@@ -15,23 +15,23 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "Es necesario el nombre de usuario!",
     });
-    console.log(req.body);
+
     return;
   } else if (!req.body.email) {
     res.status(400).send({
       message: "Es necesario el correo electronico!",
     });
-    console.log(req.body);
+
     return;
   } else if (!req.body.departamento) {
     res.status(400).send({
       message: "Es necesario indicar el departamento!",
     });
-    console.log(req.body);
+
     return;
   }
   // Si no hay rol lo pongo como 1
-  let rol = req.body.rol ? req.body.rol : "1";
+  let rol = req.body.rol ? req.body.rol : "base";
 
   // Si no hay password lo pongo como null
   let pass = req.body.pass ? bcrypt.hashSync(req.body.pass, 8) : null;
@@ -41,8 +41,8 @@ exports.create = (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: pass,
-    rolIdRol: rol,
-    departamentoId: req.body.departamento,
+    rol: rol,
+    DepartamentoId: req.body.departamento,
   };
 
   // Lo guardo en la BBDD
@@ -125,7 +125,7 @@ exports.findByRol = (req, res) => {
   const rol = req.query.rol;
 
   Usuario.findAll({
-    where: { RolId: { [Op.eq]: `${rol}` } },
+    where: { rol: { [Op.eq]: `${rol}` } },
     sinpassword,
   })
     .then((data) => {
