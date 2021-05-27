@@ -44,6 +44,7 @@ exports.create = (req, res) => {
     rolIdRol: rol,
     departamentoId: req.body.departamento,
   };
+
   // Lo guardo en la BBDD
   Usuario.create(usuario)
     .then((data) => {
@@ -143,7 +144,6 @@ exports.delete = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
-      console.log(num);
       if (num == 1) {
         res.send({
           message: "Usuario borrado correctamente",
@@ -164,12 +164,13 @@ exports.delete = (req, res) => {
 // Actualizar por id
 exports.update = (req, res) => {
   const id = req.query.id;
-
+  if (req.body.password) {
+    req.body.password = bcrypt.hashSync(req.body.password, 8);
+  }
   Usuario.update(req.body, {
     where: { id: id },
   })
     .then((num) => {
-      console.log(req.body);
       if (num == 1) {
         res.send({
           message: "Usuario actualizado correctamente.",
