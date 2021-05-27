@@ -11,7 +11,6 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "Es necesario estado",
     });
-    console.log(req.body);
     return;
   }
   // Creo el objeto del cuerpo de la peticion
@@ -66,7 +65,6 @@ exports.delete = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
-      console.log(num);
       if (num == 1) {
         res.send({
           message: "Dia borrado correctamente",

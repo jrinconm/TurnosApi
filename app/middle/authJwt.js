@@ -27,7 +27,6 @@ let compruebatoken = (req, res, next) => {
 // Compruebo el nivel de acceso
 // Admin
 let isAdmin = (req, res, next) => {
-  console.log("Compruebo si es admin");
   Usuario.findByPk(req.userId).then((user) => {
     // De momento lo imprimo
     console.log(user, res, next);

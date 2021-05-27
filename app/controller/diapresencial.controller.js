@@ -11,7 +11,6 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "Es necesario dia y usuario",
     });
-    console.log(req.body);
     return;
   }
   // Si no hay estado dia lo pongo como provisional
@@ -31,7 +30,7 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Error al crear el dia presencial.",
+        message: "Error al crear el dia presencial." + err.message,
       });
     });
 };
@@ -149,7 +148,6 @@ exports.delete = (req, res) => {
     where: { id: id },
   })
     .then((num) => {
-      console.log(num);
       if (num == 1) {
         res.send({
           message: "Dia borrado correctamente",
