@@ -21,6 +21,9 @@ class Usuario extends Sequelize.Model {
         password: {
           type: Sequelize.STRING,
         },
+        rol: {
+          type: Sequelize.STRING,
+        },
         icono: {
           type: Sequelize.STRING,
         },
@@ -36,7 +39,6 @@ class Usuario extends Sequelize.Model {
     );
   }
   static associate(models) {
-    this.Rol = this.belongsTo(models.Rol);
     this.Dep = this.belongsTo(models.Departamento);
   }
   static getId(where) {

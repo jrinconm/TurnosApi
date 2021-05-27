@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Descomentar si queremos resetear la BBDD
-/*
+
 const db = require("./app/models");
 var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
@@ -26,7 +26,6 @@ let passwd = bcrypt.hashSync("azul", 8);
 // Borrar en produccion
 
 const Usuario = db.Usuario;
-const Rol = db.Rol;
 const Departamento = db.Departamento;
 const DiaPresencial = db.DiaPresencial;
 const EstadoDia = db.EstadoDia;
@@ -38,10 +37,6 @@ db.sequelize.sync({ force: true }).then(() => {
 
 // Pueblo con datos de prueba
 function poblar() {
-  // Creo 3 roles
-  ["Usuario", "Administrador", "Super"].forEach((dato) =>
-    Rol.create({ descripcion: dato })
-  );
   // Creo 3 departamentos
   ["Wintel", "Centrales", "Distribuidos"].forEach((dato) =>
     Departamento.create({ descripcion: dato })
@@ -55,21 +50,22 @@ function poblar() {
     {
       username: "Pepe",
       email: "pepe@email.com",
-      RolId: 1,
+      Rol: 1,
       password: passwd,
       DepartamentoId: 2,
     },
     {
       username: "Jose",
       email: "jose@email.com",
-      RolId: 2,
+      Rol: 2,
       password: passwd,
       DepartamentoId: 2,
     },
     {
       username: "Josep",
       email: "josep@email.com",
-      RolId: 3,
+      Rol: 3,
+      password: passwd,
       DepartamentoId: 2,
     },
   ].forEach((dato) => Usuario.create(dato));
@@ -109,9 +105,10 @@ function poblar() {
 }
 
 // Creo el scheduler de mysql para marcar como cerrados los dias
-
+const config = require("./app/config/db.config.js");
+const HOST = process.env.DBHOST || config.HOST;
 let conexion = mysql.createConnection({
-  host: "mariadb",
+  host: HOST,
   port: 3306,
   user: "root",
   password: "qwerty",
@@ -135,7 +132,7 @@ consulta.forEach((element) =>
 );
 
 conexion.end();
-*/
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
@@ -143,7 +140,6 @@ app.get("/", (req, res) => {
 require("./app/routes/departamento.routes")(app);
 require("./app/routes/diapresencial.routes")(app);
 require("./app/routes/estadodia.routes")(app);
-require("./app/routes/rol.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/auth.routes")(app);
 // set port, listen for requests
