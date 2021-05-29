@@ -15,6 +15,13 @@ class DiaPresencial extends Sequelize.Model {
         // Elimino el cambio de nombre en la tabla
         freezeTableName: true,
         sequelize,
+        indexes: [
+          // Create a unique index on email
+          {
+            unique: true,
+            fields: ["dia", "UsuarioId"],
+          },
+        ],
       }
     );
   }

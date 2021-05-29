@@ -23,7 +23,6 @@ var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
 var bcrypt = require("bcryptjs");
 let passwd = bcrypt.hashSync("azul", 8);
-// Borrar en produccion
 
 const Usuario = db.Usuario;
 
