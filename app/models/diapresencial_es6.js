@@ -7,6 +7,9 @@ class DiaPresencial extends Sequelize.Model {
           type: Sequelize.DATEONLY,
           allowNull: false,
         },
+        estado: {
+          type: Sequelize.STRING,
+        },
       },
       {
         // Elimino el cambio de nombre en la tabla
@@ -17,7 +20,6 @@ class DiaPresencial extends Sequelize.Model {
   }
   static associate(models) {
     this.Usuario = this.belongsTo(models.Usuario);
-    this.Estado = this.belongsTo(models.EstadoDia);
   }
   static getId(where) {
     return this.findOne({

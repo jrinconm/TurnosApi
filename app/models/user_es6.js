@@ -13,6 +13,10 @@ class Usuario extends Sequelize.Model {
           allowNull: false,
           unique: true,
         },
+        nombre: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         email: {
           type: Sequelize.STRING,
           allowNull: false,

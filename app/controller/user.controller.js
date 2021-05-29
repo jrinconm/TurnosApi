@@ -32,7 +32,8 @@ exports.create = (req, res) => {
   }
   // Si no hay rol lo pongo como 1
   let rol = req.body.rol ? req.body.rol : "base";
-
+  // Si no hay nombre lo pongo como username
+  let nombre = req.body.nombre ? req.body.nombre : req.body.username;
   // Si no hay password lo pongo como null
   let pass = req.body.pass ? bcrypt.hashSync(req.body.pass, 8) : null;
 
@@ -43,6 +44,7 @@ exports.create = (req, res) => {
     password: pass,
     rol: rol,
     departamento: req.body.departamento,
+    nombre: nombre,
   };
 
   // Lo guardo en la BBDD

@@ -18,11 +18,9 @@ db.Sequelize = Sequelize;
 // La funcion
 db.sequelize = sequelize;
 // Las clases y tablas
-var EstadoDia = require("./estadodia_es6.js");
 var DiaPresencial = require("./diapresencial_es6.js");
 var Usuario = require("./user_es6.js");
 // Inicializo
-db.EstadoDia = EstadoDia.init(sequelize, Sequelize);
 db.DiaPresencial = DiaPresencial.init(sequelize, Sequelize);
 db.Usuario = Usuario.init(sequelize, Sequelize);
 // Creo las asociaciones

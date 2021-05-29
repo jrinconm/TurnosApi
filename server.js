@@ -35,10 +35,6 @@ db.sequelize.sync({ force: true }).then(() => {
 
 // Pueblo con datos de prueba
 function poblar() {
-  // Creo 3 estados dia
-  ["Propuesto", "Confirmado", "Cambiando"].forEach((dato) =>
-    EstadoDia.create({ descripcion: dato })
-  );
   // Creo 3 usuarios, uno de cada tipo
   [
     {
@@ -97,7 +93,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });
 });
 require("./app/routes/diapresencial.routes")(app);
-require("./app/routes/estadodia.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/auth.routes")(app);
 // set port, listen for requests
