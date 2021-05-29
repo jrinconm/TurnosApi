@@ -6,6 +6,7 @@ class DiaPresencial extends Sequelize.Model {
         dia: {
           type: Sequelize.DATEONLY,
           allowNull: false,
+          unique: "clavecompuesta",
         },
         estado: {
           type: Sequelize.STRING,
@@ -26,7 +27,8 @@ class DiaPresencial extends Sequelize.Model {
     );
   }
   static associate(models) {
-    this.Usuario = this.belongsTo(models.Usuario);
+    (this.Usuario = this.belongsTo(models.Usuario)),
+      { foreignKey: "clavecompuesta" };
   }
   static getId(where) {
     return this.findOne({

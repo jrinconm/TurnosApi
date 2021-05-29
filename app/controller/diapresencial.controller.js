@@ -38,7 +38,9 @@ exports.create = (req, res) => {
 // Obtener todos
 exports.findAll = (req, res) => {
   DiaPresencial.findAll({
-    include: [{ model: db.Usuario, attributes: ["rol", "departamento"] }],
+    include: [
+      { model: db.Usuario, attributes: ["username", "rol", "departamento"] },
+    ],
   })
     .then((data) => {
       res.send(data);
