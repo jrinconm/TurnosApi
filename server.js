@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Descomentar si queremos resetear la BBDD
-/*
+
 const db = require("./app/models");
 var mysql = require("mysql");
 // De momento para poner la contraseña a fuego
@@ -26,7 +26,6 @@ let passwd = bcrypt.hashSync("azul", 8);
 // Borrar en produccion
 
 const Usuario = db.Usuario;
-const EstadoDia = db.EstadoDia;
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and Resync Db");
@@ -40,6 +39,7 @@ function poblar() {
     {
       username: "Pepe",
       email: "pepe@email.com",
+      nombre: "Pepe de Dios",
       rol: "base",
       password: passwd,
       departamento: "administración",
@@ -48,12 +48,14 @@ function poblar() {
       username: "Jose",
       email: "jose@email.com",
       rol: "gestor",
+      nombre: "Jose Cortes",
       password: passwd,
       departamento: "administración",
     },
     {
       username: "Josep",
       email: "josep@email.com",
+      nombre: "Josep Colom",
       rol: "admin",
       password: passwd,
       departamento: "administración",
@@ -87,7 +89,7 @@ consulta.forEach((element) =>
 );
 
 conexion.end();
-*/
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Sin acceso al raiz" });

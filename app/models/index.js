@@ -5,6 +5,8 @@ const HOST = process.env.DBHOST || config.HOST;
 const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   host: HOST,
   dialect: config.dialect,
+  // Deshabilito la salida de las consultas a la consola node
+  logging: false,
   pool: {
     max: config.pool.max,
     min: config.pool.min,
