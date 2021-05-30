@@ -17,7 +17,7 @@ class DiaPresencial extends Sequelize.Model {
         freezeTableName: true,
         sequelize,
         indexes: [
-          // Create a unique index on email
+          // Create a unique index on dia y UsuarioId
           {
             unique: true,
             fields: ["dia", "UsuarioId"],
