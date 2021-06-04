@@ -15,7 +15,6 @@ module.exports = (app) => {
   router.post("/", [authJwt.compruebatoken], diapresencial.create);
 
   // Read -- Obtener todos
-
   router.get("/", [authJwt.compruebatoken], diapresencial.findAll);
 
   // Read -- Buscar por mes
@@ -24,8 +23,15 @@ module.exports = (app) => {
   // Read -- Buscar por dia
   router.get("/dia", [authJwt.compruebatoken], diapresencial.findOne);
 
-  // Read -- Busqueda por nombre
+  // Read -- Busqueda por id de nombre
   router.get("/name", [authJwt.compruebatoken], diapresencial.findByName);
+
+  // Read -- Busqueda por mes e id
+  router.get(
+    "/mesynombre",
+    [authJwt.compruebatoken],
+    diapresencial.findByNameyMes
+  );
 
   // Read -- Busqueda por departamento
   router.get(

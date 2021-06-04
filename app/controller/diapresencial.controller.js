@@ -112,6 +112,32 @@ exports.findByMes = (req, res) => {
     });
 };
 
+// Read -- Buscar por mes y nombre
+exports.findByNameyMes = (req, res) => {
+  const mes = req.query.mes;
+  const anyo = req.query.anyo;
+  const usuario = req.query.usuario;
+  // El mes empieza en 0
+  let inicio = new Date(anyo, parseInt(mes - 1));
+  let fin = new Date(anyo, parseInt(mes));
+  DiaPresencial.findAll({
+    where: {
+      UsuarioId: { [Op.eq]: `${usuario}` },
+      dia: {
+        [Op.gte]: inicio,
+        [Op.lt]: fin,
+      },
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving mes " + mes + " " + err,
+      });
+    });
+};
 // Busqueda por departamento
 exports.findByDep = (req, res) => {
   const departamento = req.query.departamento;

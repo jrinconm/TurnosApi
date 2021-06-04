@@ -35,6 +35,7 @@ exports.login = (req, res) => {
         email: user.email,
         rol: user.rol,
         accessToken: token,
+        departamento: user.departamento,
       });
     })
     .catch((err) => {
