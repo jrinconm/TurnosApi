@@ -94,8 +94,6 @@ exports.findByMes = (req, res) => {
   // El mes empieza en 0
   let inicio = new Date(anyo, parseInt(mes - 1));
   let fin = new Date(anyo, parseInt(mes));
-  console.log(inicio.toLocaleDateString("es-ES"));
-  console.log(fin.toLocaleDateString("es-ES"));
   DiaPresencial.findAll({
     where: {
       dia: {

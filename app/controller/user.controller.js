@@ -75,7 +75,6 @@ exports.findAll = (req, res) => {
 // Buscar por id
 exports.findOne = (req, res) => {
   const id = req.query.id;
-
   Usuario.findByPk(id, sinpassword)
     .then((data) => {
       res.send(data);
@@ -90,10 +89,8 @@ exports.findOne = (req, res) => {
 // Busqueda por nombre
 exports.findByName = (req, res) => {
   const usuario = req.query.name;
-
-  Usuario.findAll({
+  Usuario.findAll(sinpassword, {
     where: { username: { [Op.like]: `%${usuario}%` } },
-    sinpassword,
   })
     .then((data) => {
       res.send(data);
@@ -108,9 +105,8 @@ exports.findByName = (req, res) => {
 // Busqueda por departamento
 exports.findByDep = (req, res) => {
   const departamento = req.query.departamento;
-  Usuario.findAll({
+  Usuario.findAll(sinpassword, {
     where: { departamento: { [Op.eq]: `${departamento}` } },
-    sinpassword,
   })
     .then((data) => {
       res.send(data);
