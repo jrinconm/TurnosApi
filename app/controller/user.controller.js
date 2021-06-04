@@ -89,8 +89,11 @@ exports.findOne = (req, res) => {
 // Busqueda por nombre
 exports.findByName = (req, res) => {
   const usuario = req.query.name;
-  Usuario.findAll(sinpassword, {
-    where: { username: { [Op.like]: `%${usuario}%` } },
+  Usuario.findAll({
+    where: {
+      username: { [Op.like]: `%${usuario}%` },
+    },
+    attributes: { exclude: ["password"] },
   })
     .then((data) => {
       res.send(data);
@@ -105,8 +108,11 @@ exports.findByName = (req, res) => {
 // Busqueda por departamento
 exports.findByDep = (req, res) => {
   const departamento = req.query.departamento;
-  Usuario.findAll(sinpassword, {
-    where: { departamento: { [Op.eq]: `${departamento}` } },
+  Usuario.findAll({
+    where: {
+      departamento: { [Op.eq]: `${departamento}` },
+    },
+    attributes: { exclude: ["password"] },
   })
     .then((data) => {
       res.send(data);
@@ -124,7 +130,7 @@ exports.findByRol = (req, res) => {
 
   Usuario.findAll({
     where: { rol: { [Op.eq]: `${rol}` } },
-    sinpassword,
+    attributes: { exclude: ["password"] },
   })
     .then((data) => {
       res.send(data);
