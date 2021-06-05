@@ -5,8 +5,8 @@ const cors = require("cors");
 const app = express();
 // Deshabilitado para aceptar todos los origenes
 var corsOptions = {
-  //origin: "http://jrincon.eu",
-  origin: "http://localhost:8081",
+  origin: "http://jrincon.eu",
+  //origin: "http://localhost:8081",
 };
 
 app.use(cors(corsOptions));
